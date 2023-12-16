@@ -1,4 +1,3 @@
-import React from "react";
 import gripVertical from "./assets/grip-vertical.svg";
 import "./App.css";
 import { useState } from "react";

@@ -1,18 +1,21 @@
 import gripVertical from "./assets/grip-vertical.svg";
 import "./App.css";
 import { useState } from "react";
+import { ModalForm } from "./components/ModalForm";
 
 function App() {
   const [elements, setElements] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
   // console.log(elements);
   return (
     <>
       <main
-        className='h-screen'
+        className='h-screen '
         // onDragOver={(e) => {
         //   console.log({ e });
         // }}
       >
+        {isOpen && <ModalForm modalProps={{ blockType: "Label", setIsOpen }} />}
         <div className='h-auto'>{elements.map((item) => item)}</div>
 
         {/* SIDEBAR */}
@@ -36,25 +39,25 @@ function App() {
                       key={`${e.screenX}ss${e.screenY}`}
                       draggable
                     >
-                      <img src={gripVertical} alt='grip-icon' />
+                      <img src={gripVertical} alt='grip_icon' />
                       <div className='ml-2'>Label</div>
                     </div>,
                   ]);
                 }}
               >
-                <img src={gripVertical} alt='grip-icon' />
+                <img src={gripVertical} alt='grip_icon' />
                 <div className='ml-2'>Label</div>
               </div>
 
               {/* INPUT */}
               <div className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'>
-                <img src={gripVertical} alt='grip-icon' />
+                <img src={gripVertical} alt='grip_icon' />
                 <div className='ml-2'>Input</div>
               </div>
 
               {/* BUTTON */}
               <div className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'>
-                <img src={gripVertical} alt='grip-icon' />
+                <img src={gripVertical} alt='grip_icon' />
                 <div className='ml-2'>Button</div>
               </div>
             </div>

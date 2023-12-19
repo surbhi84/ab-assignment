@@ -1,42 +1,41 @@
 import { v4 as uuid } from "uuid";
 import gripVertical from "../assets/grip-vertical.svg";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { ADDELEMENT } from "../hooks/reducer/types";
 
 export const Blocks = ({
   setElementsId,
-  // elememtsId,
-  // elementsDict,
-  //   setElements,
-  //   setIsDragged,
-  //   setIsOpen,
-  //   setModelId,
   initialPos,
   setInitialPos,
-  setElementsDict,
+  elementsDispatch,
 }) => {
   const labelRef = useRef();
   const InputRef = useRef();
   const ButtonRef = useRef();
 
+  const [mouseInitial, setMouseInitial] = useState({ top: 0, left: 0 });
+
   const handleDragEnd = (e, blockType) => {
-    console.log(initialPos.left,"lllll"); // prints 200px
-
-    const id = uuid();
-    setElementsId((p) => [...p, id]);
-    setElementsDict((p) => ({
-      ...p,
-      [id]: {
-        blockType,
-        fontWeight: "",
-        fontSize: "",
-        text: "",
-        // top: e.pageY,
-        // left: e.pageX,
-
-        top: e.pageY - initialPos.top,
-        left: e.pageX - initialPos.left,
-      },
-    }));
+    if (
+      initialPos.left - 24 >
+      e.pageX - (mouseInitial.left - initialPos.left) + 278
+    ) {
+      const id = uuid();
+      setElementsId((p) => [...p, id]);
+      elementsDispatch({
+        type: ADDELEMENT,
+        payload: {
+          [id]: {
+            blockType,
+            fontWeight: "",
+            fontSize: "",
+            text: "",
+            top: e.pageY - (mouseInitial.top - initialPos.top),
+            left: e.pageX - (mouseInitial.left - initialPos.left),
+          },
+        },
+      });
+    }
   };
 
   return (
@@ -49,11 +48,21 @@ export const Blocks = ({
         onDragStart={(e) => {
           const tempPos = labelRef.current.getBoundingClientRect(); // element initiial pos
           setInitialPos({
-            top: e.pageY - tempPos.y,
-            left: e.pageX - tempPos.x,
+            top: tempPos.y,
+            left: tempPos.x,
+          });
+          setMouseInitial({
+            top: e.pageY,
+            left: e.pageX,
           });
         }}
-        onDragEnd={(e) => handleDragEnd(e, "Label")}
+        onDragEnd={(e) => {
+          if (
+            e.pageX - (mouseInitial.left - initialPos.left) > 0 &&
+            e.pageY - (mouseInitial.top - initialPos.top) > 0
+          )
+            handleDragEnd(e, "Label");
+        }}
       >
         <img src={gripVertical} alt='grip_icon' />
         <div className='ml-2'>Label</div>
@@ -67,11 +76,21 @@ export const Blocks = ({
         onDragStart={(e) => {
           const tempPos = InputRef.current.getBoundingClientRect(); // element initiial pos
           setInitialPos({
-            top: e.pageY - tempPos.y,
-            left: e.pageX - tempPos.x,
+            top: tempPos.y,
+            left: tempPos.x,
+          });
+          setMouseInitial({
+            top: e.pageY,
+            left: e.pageX,
           });
         }}
-        onDragEnd={(e) => handleDragEnd(e, "Input")}
+        onDragEnd={(e) => {
+          if (
+            e.pageX - (mouseInitial.left - initialPos.left) > 0 &&
+            e.pageY - (mouseInitial.top - initialPos.top) > 0
+          )
+            handleDragEnd(e, "Input");
+        }}
       >
         <img src={gripVertical} alt='grip_icon' />
         <div className='ml-2'>Input</div>
@@ -85,11 +104,21 @@ export const Blocks = ({
         onDragStart={(e) => {
           const tempPos = ButtonRef.current.getBoundingClientRect(); // element initiial pos
           setInitialPos({
-            top: e.pageY - tempPos.y,
-            left: e.pageX - tempPos.x,
+            top: tempPos.y,
+            left: tempPos.x,
+          });
+          setMouseInitial({
+            top: e.pageY,
+            left: e.pageX,
           });
         }}
-        onDragEnd={(e) => handleDragEnd(e, "Button")}
+        onDragEnd={(e) => {
+          if (
+            e.pageX - (mouseInitial.left - initialPos.left) > 0 &&
+            e.pageY - (mouseInitial.top - initialPos.top) > 0
+          )
+            handleDragEnd(e, "Button");
+        }}
       >
         <img src={gripVertical} alt='grip_icon' />
         <div className='ml-2'>Button</div>

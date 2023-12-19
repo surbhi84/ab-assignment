@@ -11,8 +11,6 @@ export const Element = ({
   initialPos,
   setInitialPos,
 }) => {
-  console.log(elementsDict, id);
-
   return (
     <div
       className='absolute flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
@@ -38,7 +36,7 @@ export const Element = ({
               left: elementsDict[id].left - initialPos.left + e.pageX,
             },
           },
-        })
+        });
       }}
     >
       <ModalForm

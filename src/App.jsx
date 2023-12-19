@@ -1,66 +1,47 @@
-import gripVertical from "./assets/grip-vertical.svg";
 import "./App.css";
 import { useState } from "react";
-import { ModalForm } from "./components/ModalForm";
+
+import { Blocks } from "./components/Blocks";
+import { Element } from "./components/Element";
 
 function App() {
-  const [elements, setElements] = useState([]);
-  const [isOpen, setIsOpen] = useState(true);
-  // console.log(elements);
+  const [elementsId, setElementsId] = useState([]); // stores an array with id's of all elements
+  const [elementsDict, setElementsDict] = useState({}); // stores a dictionary with id's of all details of the elements
+  const [isOpen, setIsOpen] = useState(false); // manages opening and closing of modalForm
+
+  const [initialPos, setInitialPos] = useState({ top: 0, left: 0 }); //initial position of element before drag starts
+
   return (
     <>
-      <main
-        className='h-screen '
-        // onDragOver={(e) => {
-        //   console.log({ e });
-        // }}
-      >
-        {isOpen && <ModalForm modalProps={{ blockType: "Label", setIsOpen }} />}
-        <div className='h-auto'>{elements.map((item) => item)}</div>
+      <main className='h-screen '>
+        <div className='h-auto droppable' >
+          {elementsId.map((id) => (
+            <Element
+              key={id}
+              id={id}
+              elementsDict={elementsDict}
+              setElementsDict={setElementsDict}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              initialPos={initialPos}
+              setInitialPos={setInitialPos}
+            />
+          ))}
+        </div>
 
         {/* SIDEBAR */}
         <div className='bg-sidebarBg h-screen w-[326px] ml-auto'>
           <div className='px-6'>
             <div className='text-abWhite font-bold text-xl py-4'>BLOCKS</div>
-            <div className=' flex flex-col gap-2 text-base'>
-              {/* LABEL */}
-              <div
-                className='flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
-                draggable
-                onDragEnd={(e) => {
-                  setElements((p) => [
-                    ...p,
-                    <div
-                      className='absolute flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
-                      style={{
-                        top: `${e.pageY}px`,
-                        left: `${e.pageX}px`,
-                      }}
-                      key={`${e.screenX}ss${e.screenY}`}
-                      draggable
-                    >
-                      <img src={gripVertical} alt='grip_icon' />
-                      <div className='ml-2'>Label</div>
-                    </div>,
-                  ]);
-                }}
-              >
-                <img src={gripVertical} alt='grip_icon' />
-                <div className='ml-2'>Label</div>
-              </div>
 
-              {/* INPUT */}
-              <div className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'>
-                <img src={gripVertical} alt='grip_icon' />
-                <div className='ml-2'>Input</div>
-              </div>
-
-              {/* BUTTON */}
-              <div className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'>
-                <img src={gripVertical} alt='grip_icon' />
-                <div className='ml-2'>Button</div>
-              </div>
-            </div>
+            <Blocks
+              elementsId={elementsId}
+              setElementsId={setElementsId}
+              elementsDict={elementsDict}
+              setElementsDict={setElementsDict}
+              initialPos={initialPos}
+              setInitialPos={setInitialPos}
+            />
           </div>
         </div>
       </main>

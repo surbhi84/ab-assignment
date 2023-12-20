@@ -8,22 +8,20 @@ import { useElementDict } from "./hooks/reducer/useElementDict";
 function App() {
   const [elementsId, setElementsId] = useState([]); // stores an array with id's of all elements
   const [elementsDict, elementsDispatch] = useElementDict();
-  const [isOpen, setIsOpen] = useState(false); // manages opening and closing of modalForm
+
 
   const [initialPos, setInitialPos] = useState({ top: 0, left: 0 }); //initial position of element before drag starts
 
   return (
     <>
-      <main className='h-screen '>
-        <div className='h-auto droppable'>
+      <main className='h-screen flex'>
+        <div className='h-full flex-grow droppable bg-dropBackground'>
           {elementsId.map((id) => (
             <Element
               key={id}
               id={id}
               elementsDict={elementsDict}
               elementsDispatch={elementsDispatch}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
               initialPos={initialPos}
               setInitialPos={setInitialPos}
             />

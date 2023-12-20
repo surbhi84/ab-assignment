@@ -9,9 +9,11 @@ export default {
     },
     colors: {
       abBlack: "rgba(0,0,0,1)",
+      abLightBlack:"rgba(0, 0, 0, 0.07)",
       abWhite: "rgba(255, 255, 255, 1)",
       abLightGray: "rgba(217, 217, 217, 1)",
-      abBtn: "rgba(0, 68, 193, 1)",
+      abBtn: "rgba(0, 68, 193, 1)", 
+      dropBackground:"#F3F3F3",
       sidebarBg: "#2D2D2D",
     },
   },

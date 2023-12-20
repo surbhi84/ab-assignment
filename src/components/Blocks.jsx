@@ -29,7 +29,7 @@ export const Blocks = ({
             blockType,
             fontWeight: "",
             fontSize: "",
-            text: "",
+            text: blockType === "Label" ? ` This is a Label` : blockType==="Input" ? "" : "Button",
             top: e.pageY - (mouseInitial.top - initialPos.top),
             left: e.pageX - (mouseInitial.left - initialPos.left),
           },
@@ -42,7 +42,7 @@ export const Blocks = ({
     <div className=' flex flex-col gap-2 text-base'>
       {/* LABEL */}
       <div
-        className='flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
+        className='flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4 cursor-grab'
         ref={labelRef}
         draggable
         onDragStart={(e) => {
@@ -70,7 +70,7 @@ export const Blocks = ({
 
       {/* INPUT */}
       <div
-        className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
+        className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4 cursor-grab'
         ref={InputRef}
         draggable
         onDragStart={(e) => {
@@ -98,7 +98,7 @@ export const Blocks = ({
 
       {/* BUTTON */}
       <div
-        className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4'
+        className=' flex bg-abWhite w-[278px] h-[48px] rounded items-center px-4 cursor-grab'
         ref={ButtonRef}
         draggable
         onDragStart={(e) => {

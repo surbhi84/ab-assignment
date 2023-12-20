@@ -1,14 +1,30 @@
 import Cross from "../assets/times.svg";
+import { EDITELEMENT } from "../hooks/reducer/types";
 
-export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
-  // const [isOpen, setIsOpen] = useState(false); // manages opening and closing of modalForm
+export const ModalForm = ({
+  id,
+  isOpen,
+  setIsOpen,
+  blockType,
+  elementsDict,
+  elementsDispatch,
+}) => {
+  const onChangeHandler = (details) => {
+    elementsDispatch({
+      type: EDITELEMENT,
+      payload: { id, details },
+    });
+  };
+
+  console.log(elementsDict[id]);
+
   return (
     <>
       {isOpen && (
         <div
-          className='flex flex-row items-center justify-center bg-abBlack/50 fixed h-screen p-2 inset-0 overflow-hidden'
+          className='flex flex-row items-center justify-center bg-abBlack/50 fixed h-screen p-2 inset-0 overflow-hidden z-10'
           onClick={(e) => {
-            setIsOpen(false)
+            setIsOpen(false);
             e.stopPropagation();
           }}
         >
@@ -35,6 +51,8 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
                 placeholder='This is a label'
+                value={elementsDict[id].text}
+                onChange={(e) => onChangeHandler({ text: e.target.value })}
               ></input>
             </div>
 
@@ -43,6 +61,8 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
                 placeholder='This is a label'
+                value={elementsDict[id].left}
+                onChange={(e) => onChangeHandler({ left: e.target.value })}
               ></input>
             </div>
 
@@ -51,6 +71,8 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
                 placeholder='This is a label'
+                value={elementsDict[id].top}
+                onChange={(e) => onChangeHandler({ top: e.target.value })}
               ></input>
             </div>
 
@@ -59,6 +81,8 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
                 placeholder='This is a label'
+                value={elementsDict[id].fontSize}
+                onChange={(e) => onChangeHandler({ fontSize: e.target.value })}
               ></input>
             </div>
 
@@ -67,10 +91,17 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
                 placeholder='This is a label'
+                value={elementsDict[id].fontWeight}
+                onChange={(e) =>
+                  onChangeHandler({ fontWeight: e.target.value })
+                }
               ></input>
             </div>
 
-            <button className='bg-abBtn text-abWhite px-4 py-2 w-fit rounded mt-10 mb-8'>
+            <button
+              className='bg-abBtn text-abWhite px-4 py-2 w-fit rounded mt-10 mb-8'
+              onClick={() => setIsOpen(false)}
+            >
               Save Changes
             </button>
           </div>
@@ -79,4 +110,3 @@ export const ModalForm = ({ isOpen, setIsOpen, blockType }) => {
     </>
   );
 };
-

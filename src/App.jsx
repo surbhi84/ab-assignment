@@ -8,7 +8,7 @@ import { useElementDict } from "./hooks/reducer/useElementDict";
 function App() {
   const [elementsId, setElementsId] = useState([]); // stores an array with id's of all elements
   const [elementsDict, elementsDispatch] = useElementDict();
-
+  const [selectedId, setSelectedId] = useState("");
 
   const [initialPos, setInitialPos] = useState({ top: 0, left: 0 }); //initial position of element before drag starts
 
@@ -22,8 +22,11 @@ function App() {
               id={id}
               elementsDict={elementsDict}
               elementsDispatch={elementsDispatch}
+              setElementsId={setElementsId}
               initialPos={initialPos}
               setInitialPos={setInitialPos}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
             />
           ))}
         </div>

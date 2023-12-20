@@ -1,25 +1,38 @@
 import { ModalForm } from "./ModalForm";
 // import gripVertical from "../assets/grip-vertical.svg";
-import { EDITELEMENT } from "../hooks/reducer/types";
+import { EDITELEMENT, REMOVEELEMENT } from "../hooks/reducer/types";
 import { useState } from "react";
 
 export const Element = ({
   id,
   elementsDict,
   elementsDispatch,
+  setElementsId,
   initialPos,
   setInitialPos,
+  selectedId,
+  setSelectedId,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // manages opening and closing of modalForm
-  console.log(
-    elementsDict[id].blockType === "Label",
-    elementsDict[id].blockType
-  );
+  console.log({ elementsDict });
   return (
-    <>
+    <div
+      onKeyDown={(e) => {
+        if (selectedId !== "") {
+          if (e.key === "Enter") setIsOpen(true);
+          else if (e.key === "Delete") {
+            elementsDispatch({ type: REMOVEELEMENT, payload: id });
+            setElementsId((p) => p.filter((i) => i !== id));
+          }
+        }
+      }}
+    >
       {elementsDict[id].blockType === "Label" && (
         <label
-          className='absolute bg-abWhite cursor-grab'
+          tabIndex='0'
+          className={` absolute bg-abWhite cursor-grab ${
+            selectedId === id && " border-2 border-abRed "
+          }`}
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
@@ -28,7 +41,7 @@ export const Element = ({
           }}
           key={id}
           onClick={() => {
-            setIsOpen(true);
+            setSelectedId(id);
           }}
           draggable
           onDragStart={(e) => setInitialPos({ top: e.pageY, left: e.pageX })}
@@ -51,7 +64,9 @@ export const Element = ({
 
       {elementsDict[id].blockType === "Input" && (
         <input
-          className='absolute bg-abWhite w-[298px] h-12 px-3 border-2 border-solid border-abLightBlack cursor-grab'
+          className={`absolute bg-abWhite w-[298px] h-12 px-3 border-2 border-solid cursor-grab outline-none ${
+            selectedId === id ? "border-abRed " : "border-abLightBlack"
+          }`}
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
@@ -60,7 +75,7 @@ export const Element = ({
           }}
           key={id}
           onClick={() => {
-            setIsOpen(true);
+            setSelectedId(id);
           }}
           value={elementsDict[id].text}
           onChange={(e) => {
@@ -88,7 +103,9 @@ export const Element = ({
 
       {elementsDict[id].blockType === "Button" && (
         <button
-          className='absolute bg-abBtn text-abWhite flex items-center justify-center px-3 h-12 cursor-grab'
+          className={`absolute bg-abBtn text-abWhite flex items-center justify-center px-3 h-12 cursor-grab  ${
+            selectedId === id && " border-2 border-abRed "
+          }`}
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
@@ -97,7 +114,7 @@ export const Element = ({
           }}
           key={id}
           onClick={() => {
-            setIsOpen(true);
+            setSelectedId(id);
           }}
           value={elementsDict[id].text}
           onChange={(e) => {
@@ -172,6 +189,6 @@ export const Element = ({
         <img src={gripVertical} alt='grip_icon' />
         <div className='ml-2'>{elementsDict[id]?.blockType}</div>
       </div> */}
-    </>
+    </div>
   );
 };

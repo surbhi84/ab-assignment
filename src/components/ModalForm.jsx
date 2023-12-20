@@ -16,8 +16,6 @@ export const ModalForm = ({
     });
   };
 
-  console.log(elementsDict[id]);
-
   return (
     <>
       {isOpen && (

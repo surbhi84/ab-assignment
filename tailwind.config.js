@@ -13,6 +13,7 @@ export default {
       abWhite: "rgba(255, 255, 255, 1)",
       abLightGray: "rgba(217, 217, 217, 1)",
       abBtn: "rgba(0, 68, 193, 1)", 
+      abRed: "rgba(217, 84, 9, 1)",
       dropBackground:"#F3F3F3",
       sidebarBg: "#2D2D2D",
     },

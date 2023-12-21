@@ -12,9 +12,11 @@ export const Element = ({
   setInitialPos,
   selectedId,
   setSelectedId,
+  isImported,
 }) => {
   const [isOpen, setIsOpen] = useState(
-    JSON.parse(localStorage.getItem("elementIds"))?.find((i) => i === id)
+    JSON.parse(localStorage.getItem("elementIds"))?.find((i) => i === id) ||
+      isImported
       ? false
       : true
   ); // manages opening and closing of modalForm

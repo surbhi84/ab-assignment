@@ -13,8 +13,12 @@ export const Element = ({
   selectedId,
   setSelectedId,
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // manages opening and closing of modalForm
-  console.log({ elementsDict });
+  const [isOpen, setIsOpen] = useState(
+    JSON.parse(localStorage.getItem("elementIds")).find((i) => i === id)
+      ? false
+      : true
+  ); // manages opening and closing of modalForm
+
   return (
     <div
       onKeyDown={(e) => {

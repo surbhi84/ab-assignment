@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 import { ADDELEMENT, EDITELEMENT, REMOVEELEMENT } from "./types";
 
-export const useElementDict = () => {
-  const initialElementDict = {};
+export const useElementDict = (initial) => {
+  const initialElementDict = initial ?? {};
 
   const getElementDict = (state, { type, payload }) => {
     switch (type) {

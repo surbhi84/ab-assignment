@@ -1,16 +1,25 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Blocks } from "./components/Blocks";
 import { Element } from "./components/Element";
 import { useElementDict } from "./hooks/reducer/useElementDict";
 
 function App() {
-  const [elementsId, setElementsId] = useState([]); // stores an array with id's of all elements
-  const [elementsDict, elementsDispatch] = useElementDict();
+  const [elementsId, setElementsId] = useState(
+    JSON.parse(localStorage.getItem("elementIds"))
+  ); // stores an array with id's of all elements
+  const [elementsDict, elementsDispatch] = useElementDict(
+    JSON.parse(localStorage.getItem("elementDictionary"))
+  );
   const [selectedId, setSelectedId] = useState("");
 
   const [initialPos, setInitialPos] = useState({ top: 0, left: 0 }); //initial position of element before drag starts
+
+  useEffect(() => {
+    localStorage.setItem("elementDictionary", JSON.stringify(elementsDict));
+    localStorage.setItem("elementIds", JSON.stringify(elementsId));
+  }, [elementsDict, elementsId]);
 
   return (
     <>

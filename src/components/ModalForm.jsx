@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Cross from "../assets/times.svg";
 import { EDITELEMENT } from "../hooks/reducer/types";
 
@@ -9,11 +10,18 @@ export const ModalForm = ({
   elementsDict,
   elementsDispatch,
 }) => {
+  const [formValues, setFormValues] = useState(elementsDict[id]);
+
   const onChangeHandler = (details) => {
+    setFormValues((p) => ({ ...p, ...details }));
+  };
+
+  const onClickHandler = () => {
     elementsDispatch({
       type: EDITELEMENT,
-      payload: { id, details },
+      payload: { id, details: formValues },
     });
+    setIsOpen(false);
   };
 
   return (
@@ -48,8 +56,7 @@ export const ModalForm = ({
               <label>Text</label>
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
-                placeholder='This is a label'
-                value={elementsDict[id].text}
+                value={formValues.text}
                 onChange={(e) => onChangeHandler({ text: e.target.value })}
               ></input>
             </div>
@@ -58,8 +65,7 @@ export const ModalForm = ({
               <label>X</label>
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
-                placeholder='This is a label'
-                value={elementsDict[id].left}
+                value={formValues.left}
                 onChange={(e) => onChangeHandler({ left: e.target.value })}
               ></input>
             </div>
@@ -68,8 +74,7 @@ export const ModalForm = ({
               <label>Y</label>
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
-                placeholder='This is a label'
-                value={elementsDict[id].top}
+                value={formValues.top}
                 onChange={(e) => onChangeHandler({ top: e.target.value })}
               ></input>
             </div>
@@ -78,8 +83,7 @@ export const ModalForm = ({
               <label>Font Size</label>
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
-                placeholder='This is a label'
-                value={elementsDict[id].fontSize}
+                value={formValues.fontSize}
                 onChange={(e) => onChangeHandler({ fontSize: e.target.value })}
               ></input>
             </div>
@@ -88,8 +92,7 @@ export const ModalForm = ({
               <label>Font Weight</label>
               <input
                 className='border-abLightGray border-black border-[1px] px-3 py-2 w-full'
-                placeholder='This is a label'
-                value={elementsDict[id].fontWeight}
+                value={formValues.fontWeight}
                 onChange={(e) =>
                   onChangeHandler({ fontWeight: e.target.value })
                 }
@@ -98,7 +101,7 @@ export const ModalForm = ({
 
             <button
               className='bg-abBtn text-abWhite px-4 py-2 w-fit rounded mt-10 mb-8'
-              onClick={() => setIsOpen(false)}
+              onClick={onClickHandler}
             >
               Save Changes
             </button>

@@ -28,7 +28,7 @@ export const ModalForm = ({
     <>
       {isOpen && (
         <div
-          className='flex flex-row items-center justify-center bg-abBlack/50 fixed h-screen p-2 inset-0 overflow-hidden z-10'
+          className='flex flex-row items-center justify-center bg-abBlack/50 fixed h-screen p-2 inset-0 overflow-hidden z-30'
           onClick={(e) => {
             onClickHandler();
             e.stopPropagation();

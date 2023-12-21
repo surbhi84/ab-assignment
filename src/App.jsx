@@ -17,8 +17,10 @@ function App() {
   const [initialPos, setInitialPos] = useState({ top: 0, left: 0 }); //initial position of element before drag starts
 
   useEffect(() => {
-    localStorage.setItem("elementDictionary", JSON.stringify(elementsDict));
-    localStorage.setItem("elementIds", JSON.stringify(elementsId));
+    if (elementsId.length) {
+      localStorage.setItem("elementDictionary", JSON.stringify(elementsDict));
+      localStorage.setItem("elementIds", JSON.stringify(elementsId));
+    }
   }, [elementsDict, elementsId]);
 
   return (

@@ -7,10 +7,10 @@ import { useElementDict } from "./hooks/reducer/useElementDict";
 
 function App() {
   const [elementsId, setElementsId] = useState(
-    JSON.parse(localStorage.getItem("elementIds"))
+    JSON.parse(localStorage.getItem("elementIds")) ?? []
   ); // stores an array with id's of all elements
   const [elementsDict, elementsDispatch] = useElementDict(
-    JSON.parse(localStorage.getItem("elementDictionary"))
+    JSON.parse(localStorage.getItem("elementDictionary")) ?? {}
   );
   const [selectedId, setSelectedId] = useState("");
 
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <main className='h-screen flex'>
-        <div className='h-full flex-grow droppable bg-dropBackground'>
+        <div className='h-full flex-grow droppable bg-dropBackground overflow-hidden'>
           {elementsId.map((id) => (
             <Element
               key={id}
@@ -41,7 +41,7 @@ function App() {
         </div>
 
         {/* SIDEBAR */}
-        <div className='bg-sidebarBg h-screen w-[326px] ml-auto'>
+        <div className='bg-sidebarBg h-screen w-[326px] ml-auto z-20'>
           <div className='px-6'>
             <div className='text-abWhite font-bold text-xl py-4'>BLOCKS</div>
 

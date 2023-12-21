@@ -40,8 +40,8 @@ export const Element = ({
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
-            fontWeight: elementsDict[id]?.fontWeight,
-            fontSize: elementsDict[id]?.fontSize,
+            fontWeight: `${elementsDict[id]?.fontWeight}`,
+            fontSize: `${elementsDict[id]?.fontSize}px`,
           }}
           key={id}
           onClick={() => {
@@ -74,8 +74,8 @@ export const Element = ({
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
-            fontWeight: elementsDict[id]?.fontWeight,
-            fontSize: elementsDict[id]?.fontSize,
+            fontWeight: `${elementsDict[id]?.fontWeight}`,
+            fontSize: `${elementsDict[id]?.fontSize}px`,
           }}
           key={id}
           onClick={() => {
@@ -113,8 +113,8 @@ export const Element = ({
           style={{
             top: `${elementsDict[id]?.top}px`,
             left: `${elementsDict[id]?.left}px`,
-            fontWeight: elementsDict[id]?.fontWeight,
-            fontSize: elementsDict[id]?.fontSize,
+            fontWeight: `${elementsDict[id]?.fontWeight}`,
+            fontSize: `${elementsDict[id]?.fontSize}px`,
           }}
           key={id}
           onClick={() => {
@@ -142,7 +142,7 @@ export const Element = ({
             });
           }}
         >
-          {elementsDict[id].text}{" "}
+          {elementsDict[id].text}
         </button>
       )}
 

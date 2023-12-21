@@ -30,7 +30,7 @@ export const ModalForm = ({
         <div
           className='flex flex-row items-center justify-center bg-abBlack/50 fixed h-screen p-2 inset-0 overflow-hidden z-10'
           onClick={(e) => {
-            setIsOpen(false);
+            onClickHandler();
             e.stopPropagation();
           }}
         >
@@ -46,7 +46,7 @@ export const ModalForm = ({
                 src={Cross}
                 alt='cross_icon'
                 className='ml-auto'
-                onClick={() => setIsOpen(false)}
+                onClick={onClickHandler}
               />
             </div>
 

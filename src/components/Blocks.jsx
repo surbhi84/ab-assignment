@@ -9,6 +9,7 @@ export const Blocks = ({
   setInitialPos,
   elementsDispatch,
 }) => {
+  // refs for each block element to compute mouse to element ratio to be used for positioning
   const labelRef = useRef();
   const InputRef = useRef();
   const ButtonRef = useRef();
@@ -29,7 +30,12 @@ export const Blocks = ({
             blockType,
             fontWeight: "",
             fontSize: "",
-            text: blockType === "Label" ? ` This is a Label` : blockType==="Input" ? "" : "Button",
+            text:
+              blockType === "Label"
+                ? ` This is a Label`
+                : blockType === "Input"
+                ? ""
+                : "Button",
             top: e.pageY - (mouseInitial.top - initialPos.top),
             left: e.pageX - (mouseInitial.left - initialPos.left),
           },
@@ -56,6 +62,7 @@ export const Blocks = ({
             left: e.pageX,
           });
         }}
+        // condition to check if the element is being dragged out of sidebar
         onDragEnd={(e) => {
           if (
             e.pageX - (mouseInitial.left - initialPos.left) > 0 &&

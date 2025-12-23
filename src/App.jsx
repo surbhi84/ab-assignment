@@ -27,7 +27,7 @@ function App() {
 
   function onReaderLoad(event) {
     const importedData = JSON.parse(event.target.result);
-    setElementsId((p) => [...p, ...importedData.data.elementsId]);
+    setElementsId(p => [...p, ...importedData.data.elementsId]);
     elementsDispatch({
       type: ADDELEMENT,
       payload: { ...importedData.data.elementsDict },
@@ -42,9 +42,9 @@ function App() {
   }
 
   return (
-    <main className='h-screen flex'>
-      <div className='h-full flex-grow droppable bg-dropBackground overflow-hidden'>
-        {elementsId.map((id) => (
+    <main className="h-screen flex">
+      <div className="h-full flex-grow droppable bg-dropBackground overflow-hidden">
+        {elementsId.map(id => (
           <Element
             key={id}
             id={id}
@@ -61,9 +61,9 @@ function App() {
       </div>
 
       {/* SIDEBAR */}
-      <div className='bg-sidebarBg h-screen w-[326px] ml-auto z-20'>
-        <div className='px-6'>
-          <div className='text-abWhite font-bold text-xl py-4'>BLOCKS</div>
+      <div className="bg-sidebarBg h-screen w-[326px] ml-auto z-20">
+        <div className="px-6">
+          <div className="text-abWhite font-bold text-xl py-4">BLOCKS</div>
 
           <Blocks
             elementsId={elementsId}
@@ -83,24 +83,24 @@ function App() {
                 JSON.stringify({ data: { elementsDict, elementsId } })
               )
             }
-            download='export.json'
-            target='_blank'
-            rel='noreferrer'
+            download="export.json"
+            target="_blank"
+            rel="noreferrer"
           >
             <button
-              className='bg-dropBackground font-bold px-4 py-2 w-fit rounded mt-10 mb-8'
+              className="bg-dropBackground font-bold px-4 py-2 w-fit rounded mt-10 mb-8"
               onClick={() => {}}
             >
               Export
             </button>
           </a>
 
-          <div className='flex flex-col items-center bg-dropBackground font-bold py-2 w-fit rounded mb-8'>
+          <div className="flex flex-col items-center bg-dropBackground font-bold py-2 w-fit rounded mb-8">
             Import File
             <input
-              type='file'
+              type="file"
               onChange={onInputChange}
-              className='bg-dropBackground font-bold px-4 py-2 rounded w-[278px]'
+              className="bg-dropBackground font-bold px-4 py-2 rounded w-[278px]"
             />
           </div>
         </div>
@@ -110,3 +110,6 @@ function App() {
 }
 
 export default App;
+
+
+
